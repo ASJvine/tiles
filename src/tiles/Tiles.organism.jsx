@@ -3,7 +3,24 @@ import React from 'react';
 
 import './tiles.scss';
 
-import { setIntArray, getRandomInt } from '../utils/utils';
+import Tile from './Tile.molecule';
+
+import {
+  getIntArray, getRandomInt, getRowChunkOfSqArray,
+} from '../utils/utils';
+
+const tilesProps = (gridDimension) => {
+  const intTileArray = getIntArray(gridDimension * gridDimension, 1);
+  const intRowArray = getIntArray(gridDimension, 1);
+  const diffColorTile = getRandomInt(1, gridDimension * gridDimension);
+  const props = {
+    intTileArray,
+    intRowArray,
+    diffColorTile,
+  };
+
+  return props;
+};
 
 class Tiles extends React.Component {
   constructor(props) {
@@ -11,54 +28,46 @@ class Tiles extends React.Component {
     this.state = {
       gridDimension: getRandomInt(2, 10),
     };
-    this.boxClicked = this.boxClicked.bind(this);
+    this.tileClicked = this.tileClicked.bind(this);
   }
 
-  boxClicked(e) {
+  tileClicked(e) {
     console.log('e clicked id', e.target.id);
     console.log('e clicked id', e.target.className);
   }
 
-  boxes(rowNb, intBoxArray, diffColorTile) {
-    const boxesInRow = Math.sqrt(intBoxArray.length);
-    const start = boxesInRow * (rowNb - 1);
-    const end = boxesInRow * rowNb;
-    const rowChunk = intBoxArray.slice(start, end);
+  singleTilesRow(rowNb, intTileArray, diffColorTile) {
+    const rowChunk = getRowChunkOfSqArray(intTileArray, rowNb);
 
-    return rowChunk.map(item => (
-      <div
-        className={`box ${diffColorTile === item ? 'diff-color-tile' : ''}`}
-        key={`${rowNb}-${item}`}
-        id={`${rowNb}-${item}`}
-        onClick={this.boxClicked}
-        onKeyPress={this.boxClicked}
-        role="button"
-        tabIndex="0"
-      />
-    ));
+    return rowChunk.map((item) => {
+      const tileProps = {
+        className: `${diffColorTile === item ? 'diff-color-tile' : ''}`,
+        tileKey: `${rowNb}-${item}`,
+        onClick: this.tileClicked,
+      };
+
+      return <Tile key={tileProps.tileKey} {...tileProps} />;
+    });
   }
 
-  row(rowNb, intBoxArray, diffColorTile) {
+  allTilesRows(rowNb, intTileArray, diffColorTile) {
     return (
       <div className="row" key={`row-${rowNb}`}>
-        {this.boxes(rowNb, intBoxArray, diffColorTile)}
+        {this.singleTilesRow(rowNb, intTileArray, diffColorTile)}
       </div>
     );
   }
 
-  rows(intRowArray, intBoxArray, diffColorTile) {
-    return intRowArray.map(rowNb => this.row(rowNb, intBoxArray, diffColorTile));
+  tiles({ intRowArray, intTileArray, diffColorTile }) {
+    return intRowArray.map(rowNb => this.allTilesRows(rowNb, intTileArray, diffColorTile));
   }
 
   render() {
     const { gridDimension } = this.state;
-    const intBoxArray = setIntArray(gridDimension * gridDimension, 1);
-    const intRowArray = setIntArray(gridDimension, 1);
-    const diffColorTile = getRandomInt(1, gridDimension * gridDimension);
-
+    const calculateTilesProps = tilesProps(gridDimension);
     return (
       <div className="grid">
-        { this.rows(intRowArray, intBoxArray, diffColorTile) }
+        { this.tiles({ ...calculateTilesProps }) }
       </div>
     );
   }

@@ -12,7 +12,7 @@
   display: flex;
 }
 
-.box {
+.tile {
   background: tomato;
   margin: 5px;
   color: white;
@@ -21,14 +21,14 @@
   position: relative;
 }
 
-.box:after {
+.tile:after {
   content: "";
   float: left;
   display: block;
   padding-top: 100%;
 }
 
-.box .inner {
+.tile .inner {
   position: absolute;
   left: 0;
   right: 0;

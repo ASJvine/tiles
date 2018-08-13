@@ -1,5 +1,5 @@
 
-export const setIntArray = (dimension, startFrom = 0) => (
+export const getIntArray = (dimension, startFrom = 0) => (
   Array.from(Array(dimension).keys()).map(item => item + startFrom)
 );
 
@@ -8,4 +8,27 @@ export const getRandomInt = (min, max) => {
   const maxInt = Math.floor(max);
   // The maximum is exclusive and the minimum is inclusive
   return Math.floor(Math.random() * (maxInt - minInt)) + minInt;
+};
+
+export const getRowsSqArray = arr => Math.sqrt(arr.length);
+
+export const getRowChunkOfSqArray = (arr, rowNb) => {
+  const itemsInRow = getRowsSqArray(arr);
+  const start = itemsInRow * (rowNb - 1);
+  const end = itemsInRow * rowNb;
+
+  return arr.slice(start, end);
+};
+
+export const tilesProps = (gridDimension) => {
+  const intTileArray = getIntArray(gridDimension * gridDimension, 1);
+  const intRowArray = getIntArray(gridDimension, 1);
+  const diffColorTile = getRandomInt(1, gridDimension * gridDimension);
+  const props = {
+    intTileArray,
+    intRowArray,
+    diffColorTile,
+  };
+
+  return props;
 };
