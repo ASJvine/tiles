@@ -1,5 +1,13 @@
 {
   "extends": "airbnb",
   "rules": {
-  }
+  },
+  "overrides": [{
+    "files": ["*.test.js"],
+    "globals": {
+      "describe": false,
+      "test": false,
+      "expect": false
+    }
+  }]
 }

@@ -6,27 +6,16 @@ import './tiles.scss';
 import Tile from './Tile.molecule';
 
 import {
-  getIntArray, getRandomInt, getRowChunkOfSqArray,
+  getRowChunkOfSqArray,
 } from '../utils/utils';
 
-const tilesProps = (gridDimension) => {
-  const intTileArray = getIntArray(gridDimension * gridDimension, 1);
-  const intRowArray = getIntArray(gridDimension, 1);
-  const diffColorTile = getRandomInt(1, gridDimension * gridDimension);
-  const props = {
-    intTileArray,
-    intRowArray,
-    diffColorTile,
-  };
-
-  return props;
-};
+import { tilesProps } from './helpers';
 
 class Tiles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gridDimension: getRandomInt(2, 10),
+      gridDimension: 2,
     };
     this.tileClicked = this.tileClicked.bind(this);
   }

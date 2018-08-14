@@ -3,7 +3,7 @@ export const getIntArray = (dimension, startFrom = 0) => (
   Array.from(Array(dimension).keys()).map(item => item + startFrom)
 );
 
-export const getRandomInt = (min, max) => {
+export const getRandomInt = (min = 0, max) => {
   const minInt = Math.ceil(min);
   const maxInt = Math.floor(max);
   // The maximum is exclusive and the minimum is inclusive
@@ -18,17 +18,4 @@ export const getRowChunkOfSqArray = (arr, rowNb) => {
   const end = itemsInRow * rowNb;
 
   return arr.slice(start, end);
-};
-
-export const tilesProps = (gridDimension) => {
-  const intTileArray = getIntArray(gridDimension * gridDimension, 1);
-  const intRowArray = getIntArray(gridDimension, 1);
-  const diffColorTile = getRandomInt(1, gridDimension * gridDimension);
-  const props = {
-    intTileArray,
-    intRowArray,
-    diffColorTile,
-  };
-
-  return props;
 };
