@@ -1,3 +1,5 @@
+@import '../app/styleguide.scss';
+
 .grid {
   border: solid;
   margin: 0 auto;
@@ -15,7 +17,7 @@
 .tile {
   background: tomato;
   margin: 5px;
-  color: white;
+  color: $white;
   font-weight: bold;
   flex: 1 0 auto;
   position: relative;
@@ -41,4 +43,16 @@
 
 .diff-color-tile {
   opacity: 0.5;
+}
+
+.tiles-counter {
+  .counter-title {
+    border: 1px solid;
+    border-radius: 50px;
+    padding: 2% 0;
+    max-width: 60vh;
+    margin: 5% auto;
+    width: 30%;
+    text-align: center;
+  }
 }

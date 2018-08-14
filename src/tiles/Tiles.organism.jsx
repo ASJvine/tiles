@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
-/* global alert */
-import React from 'react';
+import React, { Component } from 'react';
 
 import Counter from '../app/common/Counter.atom';
+import Modal from '../app/common/modals/Modal.organism';
 import Tile from './Tile.molecule';
 
 import {
@@ -17,14 +17,20 @@ import {
 
 import './tiles.scss';
 
-class Tiles extends React.Component {
+class Tiles extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gridDimension: INITIAL_GRID_DIMENSION,
       counterNb: INITIAL_COUNTER,
+      isModalOpen: false,
     };
     this.tileClicked = this.tileClicked.bind(this);
+    this.onClose = this.onClose.bind(this);
+  }
+
+  onClose() {
+    this.setState({ isModalOpen: false });
   }
 
   tileClicked(e) {
@@ -35,14 +41,14 @@ class Tiles extends React.Component {
       this.setState({
         counterNb: counterNb + 1,
         gridDimension: gridDimension + 1,
+        isModalOpen: true,
       });
-      alert('You\'ve got it! Level up +1 point');
     } else {
       this.setState({
         counterNb: 0,
         gridDimension: 2,
+        isModalOpen: true,
       });
-      alert('Game Over... Try again!');
     }
   }
 
@@ -73,8 +79,16 @@ class Tiles extends React.Component {
   }
 
   render() {
-    const { gridDimension, counterNb } = this.state;
+    const {
+      gridDimension, counterNb, isModalOpen,
+    } = this.state;
     const calculateTilesProps = tilesProps(gridDimension);
+
+    const modalProps = {
+      contentText: counterNb !== 0 ? `Counter ${counterNb}` : `GameOver. Total Counter: ${counterNb}`,
+      triggerText: 'what',
+      onClose: this.onClose,
+    };
 
     return (
       <div>
@@ -82,6 +96,9 @@ class Tiles extends React.Component {
           {this.tiles({ ...calculateTilesProps })}
         </div>
         <Counter className="tiles-counter" counterNb={counterNb} />
+        { isModalOpen
+          && <Modal {...modalProps} />
+        }
       </div>
     );
   }

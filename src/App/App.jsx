@@ -4,9 +4,11 @@ import MainTitle from './common/MainTitle.atom';
 
 import Tiles from '../tiles/Tiles.organism';
 
+import './styleguide.scss';
+
 const App = () => (
   <div>
-    <MainTitle text="Hello Colored Tiles Game" />
+    <MainTitle text="Colored Tiles Game" />
     <Tiles />
   </div>
 );

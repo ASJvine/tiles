@@ -1,0 +1,60 @@
+// Colors
+$brand: #73add8;
+$white: #fff;
+$black: #000;
+$error: #ff2744;
+$success: #299934;
+$text: #4a4a4a;
+$grey-10: #eaeaea;
+$grey-30: #9f9f9f;
+$cover: rgba(180, 180, 180, 0.9);
+
+// Typgraphy
+
+html, body {
+  font-size: 100%;
+  font-weight: 100;
+  font-family: "Avenir Next W01", Helvetica, Arial, sans-serif;
+  color: $text;
+}
+
+%title-readable {
+  font-weight: 100;
+  letter-spacing: 1.5px;
+}
+
+h1 {
+  font-size: 300%;
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+
+h2 {
+  font-size: 250%;
+  @extend %title-readable;
+}
+
+h3 {
+  font-size: 200%;
+  @extend %title-readable;
+}
+
+h4 {
+  font-size: 175%;
+  @extend %title-readable;
+}
+
+h5 {
+  font-size: 150%;
+  @extend %title-readable;
+}
+
+h6 {
+  font-size: 125%;
+  @extend %title-readable;
+}
+
+.main-title {
+  text-align: center;
+  padding: 2em 0 1em;
+}
