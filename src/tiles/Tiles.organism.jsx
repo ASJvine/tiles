@@ -1,28 +1,49 @@
 /* eslint-disable class-methods-use-this */
+/* global alert */
 import React from 'react';
 
-import './tiles.scss';
-
+import Counter from '../app/common/Counter.atom';
 import Tile from './Tile.molecule';
 
 import {
   getRowChunkOfSqArray,
 } from '../utils/utils';
+import {
+  tileClassname, tileKey, tilesProps, isDiffColorTile,
+} from './helpers';
+import {
+  INITIAL_GRID_DIMENSION, INITIAL_COUNTER,
+} from './constants';
 
-import { tilesProps } from './helpers';
+import './tiles.scss';
 
 class Tiles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gridDimension: 2,
+      gridDimension: INITIAL_GRID_DIMENSION,
+      counterNb: INITIAL_COUNTER,
     };
     this.tileClicked = this.tileClicked.bind(this);
   }
 
   tileClicked(e) {
-    console.log('e clicked id', e.target.id);
-    console.log('e clicked id', e.target.className);
+    const { className: tileClass } = e.target;
+    const { counterNb, gridDimension } = this.state;
+
+    if (isDiffColorTile(tileClass)) {
+      this.setState({
+        counterNb: counterNb + 1,
+        gridDimension: gridDimension + 1,
+      });
+      alert('You\'ve got it! Level up +1 point');
+    } else {
+      this.setState({
+        counterNb: 0,
+        gridDimension: 2,
+      });
+      alert('Game Over... Try again!');
+    }
   }
 
   singleTilesRow(rowNb, intTileArray, diffColorTile) {
@@ -30,8 +51,8 @@ class Tiles extends React.Component {
 
     return rowChunk.map((item) => {
       const tileProps = {
-        className: `${diffColorTile === item ? 'diff-color-tile' : ''}`,
-        tileKey: `${rowNb}-${item}`,
+        className: tileClassname(diffColorTile, item),
+        tileKey: tileKey(rowNb, item),
         onClick: this.tileClicked,
       };
 
@@ -52,11 +73,15 @@ class Tiles extends React.Component {
   }
 
   render() {
-    const { gridDimension } = this.state;
+    const { gridDimension, counterNb } = this.state;
     const calculateTilesProps = tilesProps(gridDimension);
+
     return (
-      <div className="grid">
-        { this.tiles({ ...calculateTilesProps }) }
+      <div>
+        <div className="grid">
+          {this.tiles({ ...calculateTilesProps })}
+        </div>
+        <Counter className="tiles-counter" counterNb={counterNb} />
       </div>
     );
   }
