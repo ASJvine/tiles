@@ -30,25 +30,24 @@ class Tiles extends Component {
   }
 
   onClose() {
-    this.setState({ isModalOpen: false });
+    this.setState(() => ({ isModalOpen: false }));
   }
 
   tileClicked(e) {
     const { className: tileClass } = e.target;
-    const { counterNb, gridDimension } = this.state;
 
     if (isDiffColorTile(tileClass)) {
-      this.setState({
-        counterNb: counterNb + 1,
-        gridDimension: gridDimension + 1,
+      this.setState(prevState => ({
+        counterNb: prevState.counterNb + 1,
+        gridDimension: prevState.gridDimension + 1,
         isModalOpen: true,
-      });
+      }));
     } else {
-      this.setState({
+      this.setState(() => ({
         counterNb: 0,
         gridDimension: 2,
         isModalOpen: true,
-      });
+      }));
     }
   }
 
