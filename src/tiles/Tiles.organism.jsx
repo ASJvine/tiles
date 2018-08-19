@@ -29,8 +29,21 @@ class Tiles extends Component {
     this.onClose = this.onClose.bind(this);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.modalTimer);
+  }
+
   onClose() {
+    clearInterval(this.modalTimer);
     this.setState(() => ({ isModalOpen: false }));
+  }
+
+  autoClosingModal(modalProps) {
+    this.modalTimer = setInterval(
+      () => this.onClose(),
+      700,
+    );
+    return (<Modal {...modalProps} />);
   }
 
   tileClicked(e) {
@@ -87,9 +100,12 @@ class Tiles extends Component {
     const calculateTilesProps = tilesProps(gridDimension);
 
     const modalProps = {
-      contentText: counterNb !== 0 ? `Counter ${counterNb}` : `GameOver. Total Counter: ${counterNb}`,
+      children: counterNb !== 0
+        ? <Counter className="tiles-counter" text={`Counter ${counterNb}`}/> // eslint-disable-line
+        : <p>{`GameOver. Total Counter: ${counterNb}`}</p>, // eslint-disable-line
       triggerText: 'what',
       onClose: this.onClose,
+      autoClose: counterNb > 0,
     };
 
     return (
@@ -97,10 +113,7 @@ class Tiles extends Component {
         <div className="grid">
           {this.tiles({ ...calculateTilesProps })}
         </div>
-        <Counter className="tiles-counter" counterNb={counterNb} />
-        { isModalOpen
-          && <Modal {...modalProps} />
-        }
+        { isModalOpen && this.autoClosingModal(modalProps) }
       </div>
     );
   }

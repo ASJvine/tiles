@@ -13,27 +13,36 @@ const hideVisuallyStyles = {
   whiteSpace: 'nowrap',
 };
 
-const ModalContent = ({ onClose, text }) => (
+const ModalContent = ({ onClose, children, autoClose }) => (
   <aside className="modal-cover">
     <div className="modal">
-      <button type="button" className="modal-close" onClick={onClose}>
-        <span className="hide-visually" style={hideVisuallyStyles}>
-          Close
-        </span>
-        <svg className="modal-close-icon" viewBox="0 0 40 40">
-          <path d="M 10,10 L 30,30 M 30,10 L 10,30" />
-        </svg>
-      </button>
+      { !autoClose
+        && (
+          <button type="button" className="modal-close" onClick={onClose}>
+            <span className="hide-visually" style={hideVisuallyStyles}>
+              Close
+            </span>
+            <svg className="modal-close-icon" viewBox="0 0 40 40">
+              <path d="M 10,10 L 30,30 M 30,10 L 10,30" />
+            </svg>
+          </button>
+        )
+      }
       <div className="modal-content">
-        {text}
+        { children }
       </div>
     </div>
   </aside>
 );
 
+ModalContent.defaultProps = {
+  autoClose: false,
+};
+
 ModalContent.propTypes = {
   onClose: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+  autoClose: PropTypes.bool,
 };
 
 export default ModalContent;

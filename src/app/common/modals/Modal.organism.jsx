@@ -25,22 +25,25 @@ class Modal extends Component {
   }
 
   render() {
-    const { contentText, onClose } = this.props;
+    const { children, onClose, autoClose } = this.props;
 
     return createPortal(
-      <ModalContent onClose={onClose} text={contentText} />,
+      <ModalContent onClose={onClose} autoClose={autoClose}>
+        { children }
+      </ModalContent>,
       this.el,
     );
   }
 }
 
 Modal.defaultProps = {
-  contentText: '',
+  autoClose: false,
 };
 
 Modal.propTypes = {
-  contentText: PropTypes.string,
+  children: PropTypes.element.isRequired,
   onClose: PropTypes.func.isRequired,
+  autoClose: PropTypes.bool,
 };
 
 export default Modal;
