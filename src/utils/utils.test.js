@@ -25,6 +25,17 @@ describe('getRandomInt function', () => {
     expect(getRandomInt(5, 10)).toBeLessThanOrEqual(9);
     expect(String(getRandomInt(5, 10))).toMatch(/[5-9]/);
   });
+
+  test('range [0-100]', () => {
+    const min = 0;
+    const max = 100;
+    for (let i = 0; i < 100; i += 1) {
+      const number = getRandomInt(min, max);
+
+      expect(number).toBeGreaterThanOrEqual(min);
+      expect(number).toBeLessThanOrEqual(max);
+    }
+  });
 });
 
 describe('getRowsSqArray function', () => {

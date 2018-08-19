@@ -52,7 +52,7 @@ class Tiles extends Component {
     }
   }
 
-  singleTilesRow(rowNb, intTileArray, diffColorTile) {
+  singleTilesRow(rowNb, intTileArray, diffColorTile, colors) {
     const rowChunk = getRowChunkOfSqArray(intTileArray, rowNb);
 
     return rowChunk.map((item) => {
@@ -60,22 +60,25 @@ class Tiles extends Component {
         className: tileClassname(diffColorTile, item),
         tileKey: tileKey(rowNb, item),
         onClick: this.tileClicked,
+        color: !diffColorTile ? colors.baseColor : colors.diffColor,
       };
 
       return <Tile key={tileProps.tileKey} {...tileProps} />;
     });
   }
 
-  allTilesRows(rowNb, intTileArray, diffColorTile) {
+  allTilesRows(rowNb, intTileArray, diffColorTile, colors) {
     return (
       <div className="row" key={`row-${rowNb}`}>
-        {this.singleTilesRow(rowNb, intTileArray, diffColorTile)}
+        {this.singleTilesRow(rowNb, intTileArray, diffColorTile, colors)}
       </div>
     );
   }
 
-  tiles({ intRowArray, intTileArray, diffColorTile }) {
-    return intRowArray.map(rowNb => this.allTilesRows(rowNb, intTileArray, diffColorTile));
+  tiles({
+    intRowArray, intTileArray, diffColorTile, colors,
+  }) {
+    return intRowArray.map(rowNb => this.allTilesRows(rowNb, intTileArray, diffColorTile, colors));
   }
 
   render() {

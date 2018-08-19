@@ -1,5 +1,5 @@
 import {
-  tileClassname, tileKey, isDiffColorTile, tilesProps,
+  tileClassname, tileKey, isDiffColorTile, tilesProps, getTilesRandomColor,
 } from './helpers';
 import {
   DIFF_COLOR_TILE_CLASSNAME,
@@ -40,6 +40,15 @@ describe('tilesProps function', () => {
     expect(props2n).toHaveProperty('intTileArray', [1, 2, 3, 4]);
     expect(props2n).toHaveProperty('intRowArray', [1, 2]);
     expect(props2n).toHaveProperty('diffColorTile');
+    expect(props2n).toHaveProperty('colors');
     expect(String(props2n.diffColorTile)).toMatch(/[1-4]/);
+  });
+});
+
+describe('getTilesRandomColor function', () => {
+  test('get the baseColor and diffColor for the tiles', () => {
+    const colors = getTilesRandomColor();
+    expect(colors).toHaveProperty('baseColor');
+    expect(colors).toHaveProperty('diffColor');
   });
 });

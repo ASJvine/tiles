@@ -4,9 +4,9 @@
   border: solid;
   margin: 0 auto;
   width: 80vw;
-  max-width: 60vh;
+  max-width: 80vh;
   height: 80vw;
-  max-height: 60vh;
+  max-height: 80vh;
   font-size: 1rem;
 }
 
@@ -15,7 +15,6 @@
 }
 
 .tile {
-  background: tomato;
   margin: 5px;
   color: $white;
   font-weight: bold;
@@ -52,7 +51,7 @@
     padding: 2% 0;
     max-width: 60vh;
     margin: 5% auto;
-    width: 30%;
+    width: 40%;
     text-align: center;
   }
 }
