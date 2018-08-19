@@ -13,9 +13,11 @@ const hideVisuallyStyles = {
   whiteSpace: 'nowrap',
 };
 
-const ModalContent = ({ onClose, children, autoClose }) => (
+const ModalContent = ({
+  onClose, children, autoClose, justChildren,
+}) => (
   <aside className="modal-cover">
-    <div className="modal">
+    <div className={`modal ${justChildren ? 'no-background' : ''}`}>
       { !autoClose
         && (
           <button type="button" className="modal-close" onClick={onClose}>
@@ -37,12 +39,14 @@ const ModalContent = ({ onClose, children, autoClose }) => (
 
 ModalContent.defaultProps = {
   autoClose: false,
+  justChildren: false,
 };
 
 ModalContent.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
   autoClose: PropTypes.bool,
+  justChildren: PropTypes.bool,
 };
 
 export default ModalContent;

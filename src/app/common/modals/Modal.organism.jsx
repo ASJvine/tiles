@@ -25,10 +25,12 @@ class Modal extends Component {
   }
 
   render() {
-    const { children, onClose, autoClose } = this.props;
+    const {
+      children, onClose, autoClose, justChildren,
+    } = this.props;
 
     return createPortal(
-      <ModalContent onClose={onClose} autoClose={autoClose}>
+      <ModalContent onClose={onClose} autoClose={autoClose} justChildren={justChildren}>
         { children }
       </ModalContent>,
       this.el,
@@ -38,12 +40,14 @@ class Modal extends Component {
 
 Modal.defaultProps = {
   autoClose: false,
+  justChildren: false,
 };
 
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
   onClose: PropTypes.func.isRequired,
   autoClose: PropTypes.bool,
+  justChildren: PropTypes.bool,
 };
 
 export default Modal;

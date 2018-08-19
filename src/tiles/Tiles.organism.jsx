@@ -106,6 +106,7 @@ class Tiles extends Component {
       triggerText: 'what',
       onClose: this.onClose,
       autoClose: counterNb > 0,
+      justChildren: counterNb > 0,
     };
 
     return (
