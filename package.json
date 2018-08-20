@@ -4,8 +4,8 @@
   "description": "Start playing to the awesome Colored Tiles Game!",
   "main": "index.jsx",
   "scripts": {
-    "build": "yarn install && webpack -p",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "yarn install && webpack --mode production",
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development --open",
     "test": "jest",
     "test-dev": "jest --watch",
     "coverage": "jest --coverage"
