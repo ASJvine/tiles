@@ -79,7 +79,6 @@ class Tiles extends Component {
 
     if (isDiffColorTile(tileClass)) {
       if (counter === (MAX_TILES_GAME_LEVEL - 1)) {
-        alert('🎉🎉 Congrats WINNER 🏆🏆'); // eslint-disable-line
         this.setState(prevState => ({
           counter: prevState.counter + 1,
           isScoreFormModalOpen: true,
