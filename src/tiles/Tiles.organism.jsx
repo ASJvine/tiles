@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Counter from '../app/common/Counter.atom';
 import Modal from '../app/common/modals/Modal.organism';
@@ -25,8 +25,7 @@ class Tiles extends Component {
       gridDimension: INITIAL_GRID_DIMENSION,
       counter: INITIAL_COUNTER,
       isCounterModalOpen: false,
-      isScoreModalOpen: false,
-      score: 0,
+      isScoreFormModalOpen: false,
     };
 
     this.tileClicked = this.tileClicked.bind(this);
@@ -44,15 +43,16 @@ class Tiles extends Component {
   }
 
   onCloseScoreModal() {
-    this.setState(() => ({ isScoreModalOpen: false }));
+    this.setState(() => ({
+      gridDimension: INITIAL_GRID_DIMENSION,
+      counter: INITIAL_COUNTER,
+      isScoreFormModalOpen: false,
+    }));
   }
 
   counterModal(counter) {
     const modalProps = {
-      children: counter !== 0
-        ? <Counter className="tiles-counter" text={`Counter ${counter}`} /> // eslint-disable-line
-        // NEVER reaches this case!!!
-        : <p>{`Game Over. Total Counter: ${counter}`}</p>, // eslint-disable-line
+      children: <Counter className="tiles-counter" text={`Counter ${counter}`} />,
       onClose: this.onCloseCounterModal,
       autoClose: counter > 0,
       justChildren: counter > 0,
@@ -67,7 +67,7 @@ class Tiles extends Component {
 
   scoreFormModal(counter) {
     const modalProps = {
-      children: <ScoreForm score={counter} />,
+      children: <ScoreForm score={counter} onClose={this.onCloseScoreModal} />,
       onClose: this.onCloseScoreModal,
     };
     return <Modal {...modalProps} />;
@@ -78,8 +78,12 @@ class Tiles extends Component {
     const { counter } = this.state;
 
     if (isDiffColorTile(tileClass)) {
-      if (counter === MAX_TILES_GAME_LEVEL) {
-        alert('Congrats you\'ve finished the game'); // eslint-disable-line
+      if (counter === (MAX_TILES_GAME_LEVEL - 1)) {
+        alert('🎉🎉 Congrats WINNER 🏆🏆'); // eslint-disable-line
+        this.setState(prevState => ({
+          counter: prevState.counter + 1,
+          isScoreFormModalOpen: true,
+        }));
         return;
       }
       this.setState(prevState => ({
@@ -89,10 +93,9 @@ class Tiles extends Component {
       }));
     } else {
       this.setState(prevState => ({
-        counter: 0,
+        counter: prevState.counter,
         gridDimension: 2,
-        isScoreModalOpen: counter !== 0,
-        score: prevState.counter,
+        isScoreFormModalOpen: counter > 0,
       }));
     }
   }
@@ -128,18 +131,17 @@ class Tiles extends Component {
 
   render() {
     const {
-      gridDimension, counter, isCounterModalOpen, isScoreModalOpen, score,
+      gridDimension, counter, isCounterModalOpen, isScoreFormModalOpen,
     } = this.state;
     const calculateTilesProps = tilesProps(gridDimension);
-
     return (
-      <div>
+      <Fragment>
         <div className="grid">
           {this.tiles({ ...calculateTilesProps })}
         </div>
         { isCounterModalOpen && this.counterModal(counter) }
-        { isScoreModalOpen && this.scoreFormModal(score) }
-      </div>
+        { isScoreFormModalOpen && this.scoreFormModal(counter) }
+      </Fragment>
     );
   }
 }

@@ -7,23 +7,40 @@ import {
   setItemToLocalStorage,
   getItemParsedFromLocalStorage,
 } from '../utils/utils';
+import {
+  MAX_TILES_GAME_LEVEL,
+} from '../tiles/constants';
+
+export const isWinner = score => score === MAX_TILES_GAME_LEVEL;
 
 export const descSortScoreList = scoreList => scoreList.sort((a, b) => b.score - a.score);
 
-export const isScoreListUpdated = (userScore, list) =>
-  list.length < TOP_SCORES_LIST_LENGTH || list[list.length - 1].score < userScore;
+export const isScoreHighEnough = (userScore, list) => userScore > list[list.length - 1].score;
+
+export const isListMaxLength = list => list.length === TOP_SCORES_LIST_LENGTH;
+
+export const addUserToExistingList = (user, list) => {
+  const isListMax = isListMaxLength(list);
+
+  if (!isListMax) {
+    const arr2 = descSortScoreList([].concat(list, [user]));
+    setItemToLocalStorage(TILES_GAME_LOCALSTORAGE_KEY, arr2);
+  }
+
+  if (isListMaxLength(list) && isScoreHighEnough(user.score, list)) {
+    const arr1 = descSortScoreList([].concat(list, [user]));
+    setItemToLocalStorage(TILES_GAME_LOCALSTORAGE_KEY, arr1.slice(0, TOP_SCORES_LIST_LENGTH));
+  }
+};
 
 export const updateScoreListLocalStorage = (user) => {
   const userArr = [user];
-  const localStorageData = getItemParsedFromLocalStorage(TILES_GAME_LOCALSTORAGE_KEY);
+  const scoreListLS = getItemParsedFromLocalStorage(TILES_GAME_LOCALSTORAGE_KEY);
 
-  if (!localStorageData) {
+  if (!scoreListLS) {
     setItemToLocalStorage(TILES_GAME_LOCALSTORAGE_KEY, userArr);
     return;
   }
 
-  if (isScoreListUpdated(user.score, localStorageData)) {
-    const updatedArray = descSortScoreList([].concat(localStorageData, userArr));
-    setItemToLocalStorage(TILES_GAME_LOCALSTORAGE_KEY, updatedArray);
-  }
+  addUserToExistingList(user, scoreListLS);
 };

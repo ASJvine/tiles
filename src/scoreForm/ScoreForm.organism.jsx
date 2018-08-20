@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import InputLabel from '../app/common/modals/InputLabel.atom';
-import { updateScoreListLocalStorage } from './helpers';
+import Winner from './Winner.molecule';
+import NotWinner from './NotWinner.molecule';
+
+import { updateScoreListLocalStorage, isWinner } from './helpers';
 
 import './scoreForm.scss';
 
@@ -22,10 +25,10 @@ class ScoreForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { name } = this.state;
-    const { score } = this.props;
+    const { score, onClose } = this.props;
 
     updateScoreListLocalStorage({ name, score });
-
+    if (onClose) onClose();
     this.setState({ name: '' });
   }
 
@@ -35,6 +38,7 @@ class ScoreForm extends React.Component {
 
     return (
       <form className="score-form" onSubmit={this.handleSubmit}>
+        { isWinner(score) ? <Winner /> : <NotWinner /> }
         <label className="label-wrapper" htmlFor="name">
           <InputLabel text="Name" />
           <input className="input-base input-name" type="text" value={name} placeholder="Type your name" onChange={this.handleChange} />
@@ -49,8 +53,16 @@ class ScoreForm extends React.Component {
   }
 }
 
+ScoreForm.defaultProps = {
+  onClose: '',
+};
+
 ScoreForm.propTypes = {
   score: PropTypes.number.isRequired,
+  onClose: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
 };
 
 export default ScoreForm;

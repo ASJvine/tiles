@@ -31,7 +31,7 @@ const ModalContent = ({
         )
       }
       <div className="modal-content">
-        { children }
+        {children}
       </div>
     </div>
   </aside>
