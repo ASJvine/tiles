@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import MainTitle from './common/MainTitle.atom';
 
@@ -7,10 +7,10 @@ import Tiles from '../tiles/Tiles.organism';
 import './styleguide.scss';
 
 const App = () => (
-  <div>
+  <Fragment>
     <MainTitle text="Colored Tiles Game" />
     <Tiles />
-  </div>
+  </Fragment>
 );
 
 export default App;
