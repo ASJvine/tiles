@@ -24,6 +24,7 @@ class App extends Component {
   handleClick() {
     this.setState(prevState => ({
       isScoresListDisplayed: !prevState.isScoresListDisplayed,
+      scoresList: getItemParsedFromLocalStorage(TILES_GAME_LOCALSTORAGE_KEY),
     }));
   }
 
