@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /coverage
+/dist
 
 # misc
 .DS_Store
@@ -12,4 +13,3 @@ yarn-debug.log*
 yarn-error.log*
 
 lib
-dist
