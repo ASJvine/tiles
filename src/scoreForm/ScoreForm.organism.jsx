@@ -47,7 +47,7 @@ class ScoreForm extends React.Component {
           <InputLabel text="Score" />
           <input className="input-base input-score" type="number" value={score} readOnly />
         </label>
-        <input className="submit-btn" type="submit" value="Submit" />
+        <input className="default-btn submit-btn" type="submit" value="Submit" disabled={!name} />
       </form>
     );
   }

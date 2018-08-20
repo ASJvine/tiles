@@ -59,3 +59,31 @@ h6 {
   padding: 0.5em 0;
   margin: 0;
 }
+
+.default-btn {
+  max-width: 20em;
+  padding: 1em 0;
+  font-size: 100%;
+  color: $white;
+  border: none;
+  border-radius: 50px;
+  background-color: $brand;
+  cursor: pointer;
+  &:disabled {
+    background-color: $grey-30;
+    opacity: 0.2;
+  }
+}
+
+.fame-btn {
+  display: block;
+  width: 100%;
+  margin: 1em auto;
+  max-width: 15em;
+}
+
+button[type="submit"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

@@ -1,0 +1,41 @@
+@import '../app/styleguide';
+
+.scores-wrapper {
+  margin: 0 auto;
+  width: 50vw;
+  max-width: 50vh;
+  -webkit-transition: max-height 1s ease;
+  transition: max-height 1s ease;
+
+  .title {
+    margin: 1em 0;
+    border-bottom: 1px solid $text;
+    padding-bottom: 0.5em;
+    text-align: center;
+  }
+
+  .item-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: space-around;
+
+    .item-text {
+      display: inline;
+      padding: 0 0.5em;
+    }
+
+    .name {
+      width: 60%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .score {
+      width: 40%;
+    }
+  }
+}
