@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Counter from '../app/common/Counter.atom';
 import Modal from '../app/common/modals/Modal.organism';
 import Tile from './Tile.molecule';
+import ScoreForm from '../scoreForm/ScoreForm.organism';
 
 import {
   getRowChunkOfSqArray,
@@ -12,7 +13,7 @@ import {
   tileClassname, tileKey, tilesProps, isDiffColorTile,
 } from './helpers';
 import {
-  INITIAL_GRID_DIMENSION, INITIAL_COUNTER,
+  INITIAL_GRID_DIMENSION, INITIAL_COUNTER, MAX_TILES_GAME_LEVEL,
 } from './constants';
 
 import './tiles.scss';
@@ -22,44 +23,76 @@ class Tiles extends Component {
     super(props);
     this.state = {
       gridDimension: INITIAL_GRID_DIMENSION,
-      counterNb: INITIAL_COUNTER,
-      isModalOpen: false,
+      counter: INITIAL_COUNTER,
+      isCounterModalOpen: false,
+      isScoreModalOpen: false,
+      score: 0,
     };
+
     this.tileClicked = this.tileClicked.bind(this);
-    this.onClose = this.onClose.bind(this);
+    this.onCloseCounterModal = this.onCloseCounterModal.bind(this);
+    this.onCloseScoreModal = this.onCloseScoreModal.bind(this);
   }
 
   componentWillUnmount() {
     clearInterval(this.modalTimer);
   }
 
-  onClose() {
+  onCloseCounterModal() {
     clearInterval(this.modalTimer);
-    this.setState(() => ({ isModalOpen: false }));
+    this.setState(() => ({ isCounterModalOpen: false }));
   }
 
-  autoClosingModal(modalProps) {
+  onCloseScoreModal() {
+    this.setState(() => ({ isScoreModalOpen: false }));
+  }
+
+  counterModal(counter) {
+    const modalProps = {
+      children: counter !== 0
+        ? <Counter className="tiles-counter" text={`Counter ${counter}`} /> // eslint-disable-line
+        // NEVER reaches this case!!!
+        : <p>{`Game Over. Total Counter: ${counter}`}</p>, // eslint-disable-line
+      onClose: this.onCloseCounterModal,
+      autoClose: counter > 0,
+      justChildren: counter > 0,
+    };
+
     this.modalTimer = setInterval(
-      () => this.onClose(),
+      () => this.onCloseCounterModal(),
       700,
     );
     return (<Modal {...modalProps} />);
   }
 
+  scoreFormModal(counter) {
+    const modalProps = {
+      children: <ScoreForm score={counter} />,
+      onClose: this.onCloseScoreModal,
+    };
+    return <Modal {...modalProps} />;
+  }
+
   tileClicked(e) {
     const { className: tileClass } = e.target;
+    const { counter } = this.state;
 
     if (isDiffColorTile(tileClass)) {
+      if (counter === MAX_TILES_GAME_LEVEL) {
+        alert('Congrats you\'ve finished the game'); // eslint-disable-line
+        return;
+      }
       this.setState(prevState => ({
-        counterNb: prevState.counterNb + 1,
+        counter: prevState.counter + 1,
         gridDimension: prevState.gridDimension + 1,
-        isModalOpen: true,
+        isCounterModalOpen: true,
       }));
     } else {
-      this.setState(() => ({
-        counterNb: 0,
+      this.setState(prevState => ({
+        counter: 0,
         gridDimension: 2,
-        isModalOpen: true,
+        isScoreModalOpen: counter !== 0,
+        score: prevState.counter,
       }));
     }
   }
@@ -95,26 +128,17 @@ class Tiles extends Component {
 
   render() {
     const {
-      gridDimension, counterNb, isModalOpen,
+      gridDimension, counter, isCounterModalOpen, isScoreModalOpen, score,
     } = this.state;
     const calculateTilesProps = tilesProps(gridDimension);
-
-    const modalProps = {
-      children: counterNb !== 0
-        ? <Counter className="tiles-counter" text={`Counter ${counterNb}`}/> // eslint-disable-line
-        : <p>{`GameOver. Total Counter: ${counterNb}`}</p>, // eslint-disable-line
-      triggerText: 'what',
-      onClose: this.onClose,
-      autoClose: counterNb > 0,
-      justChildren: counterNb > 0,
-    };
 
     return (
       <div>
         <div className="grid">
           {this.tiles({ ...calculateTilesProps })}
         </div>
-        { isModalOpen && this.autoClosingModal(modalProps) }
+        { isCounterModalOpen && this.counterModal(counter) }
+        { isScoreModalOpen && this.scoreFormModal(score) }
       </div>
     );
   }

@@ -1,3 +1,4 @@
+/* globals localStorage */
 export const getIntArray = (dimension, startFrom = 0) => (
   Array.from(Array(dimension).keys()).map(item => item + startFrom)
 );
@@ -17,4 +18,14 @@ export const getRowChunkOfSqArray = (arr, rowNb) => {
   const end = itemsInRow * rowNb;
 
   return arr.slice(start, end);
+};
+
+export const setItemToLocalStorage = (key, value) => (
+  localStorage.setItem(key, JSON.stringify(value))
+);
+
+export const getItemParsedFromLocalStorage = (key) => {
+  const value = localStorage.getItem(key);
+
+  return value && JSON.parse(value);
 };
