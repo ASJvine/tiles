@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import Counter from '../app/common/Counter.atom';
 import Modal from '../app/common/modals/Modal.organism';
@@ -15,8 +16,6 @@ import {
 import {
   INITIAL_GRID_DIMENSION, INITIAL_COUNTER, MAX_TILES_GAME_LEVEL,
 } from './constants';
-
-import './tiles.scss';
 
 class Tiles extends Component {
   constructor(props) {
@@ -43,11 +42,15 @@ class Tiles extends Component {
   }
 
   onCloseScoreModal() {
+    const { updateListFromLS } = this.props;
+
     this.setState(() => ({
       gridDimension: INITIAL_GRID_DIMENSION,
       counter: INITIAL_COUNTER,
       isScoreFormModalOpen: false,
     }));
+
+    updateListFromLS();
   }
 
   counterModal(counter) {
@@ -145,4 +148,7 @@ class Tiles extends Component {
   }
 }
 
+Tiles.propTypes = {
+  updateListFromLS: PropTypes.func.isRequired,
+};
 export default Tiles;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ScoreItem = ({ index, name, score }) => (
   <li className="item-wrapper" key={`${name}-${name}`}>
     <p className="item-text name">
-      {`(${index}) ${name}`}
+      {`#${index + 1} ${name}`}
     </p>
     <p className="item-text score">
       {`scored ${score}`}

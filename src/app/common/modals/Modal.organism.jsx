@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 import ModalContent from './ModalContent.molecule';
 
-import './modal.scss';
-
 const modalRoot = document.getElementById('modal');
 
 class Modal extends Component {

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import ScoresList from './ScoresList.molecule';
 
-import './scoresBoard.scss';
-
 const ScoresBoard = ({ list }) => (
   <div className="scores-wrapper">
     <h5 className="title">

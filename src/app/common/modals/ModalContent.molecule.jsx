@@ -17,7 +17,7 @@ const ModalContent = ({
   onClose, children, autoClose, justChildren,
 }) => (
   <aside className="modal-cover">
-    <div className={`modal ${justChildren ? 'no-background' : ''}`}>
+    <div className={`modal ${justChildren ? 'just-children no-background' : ''}`}>
       { !autoClose
         && (
           <button type="button" className="modal-close" onClick={onClose}>

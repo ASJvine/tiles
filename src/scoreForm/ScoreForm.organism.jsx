@@ -7,8 +7,6 @@ import NotWinner from './NotWinner.molecule';
 
 import { updateScoreListLocalStorage, isWinner } from './helpers';
 
-import './scoreForm.scss';
-
 class ScoreForm extends React.Component {
   constructor(props) {
     super(props);
