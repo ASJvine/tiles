@@ -28,7 +28,7 @@ html, body {
 }
 
 h1 {
-  font-size: 300%;
+  font-size: 250%;
   font-weight: 100;
   letter-spacing: 3px;
 }
@@ -79,6 +79,9 @@ button[type="submit"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield; // hide arrows for number input  
 }
 
 // --------------------------------------------------------------------------------------------------------------
@@ -222,7 +225,7 @@ button[type="submit"] {
   }
 }
 
-// Button.atom.jsx used in TilesAndHallOfFame.template.jsx -----------------------------------------
+// Button.atom.jsx used in TilesAndHallOfFame.organism.jsx -----------------------------------------
 .fame-btn {
   display: block;
   width: 100%;
@@ -234,7 +237,7 @@ button[type="submit"] {
 // --------------------------------------------------- scores FEATURE  -------------------------------------------
 // --------------------------------------------------------------------------------------------------------------
 
-// ScoresBoard.organism.jsx used in TilesAndHallOfFame.template.jsx -----------------------------------------
+// ScoresBoard.organism.jsx used in TilesAndHallOfFame.organism.jsx -----------------------------------------
 .scores-wrapper {
   margin: 0 auto;
   width: 50vw;
@@ -278,7 +281,7 @@ button[type="submit"] {
 // --------------------------------------------------------------------------------------------------------------
 // --------------------------------------------------- scoresForm FEATURE  -------------------------------------------
 // --------------------------------------------------------------------------------------------------------------
-// ScoresBoard.organism.jsx used in TilesAndHallOfFame.template.jsx -----------------------------------------
+// ScoresBoard.organism.jsx used in TilesAndHallOfFame.organism.jsx -----------------------------------------
 .score-form {
   .label-wrapper {
     display: block;

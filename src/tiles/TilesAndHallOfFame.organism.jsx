@@ -37,7 +37,7 @@ class TilesAndHallOfFame extends Component {
 
     if (!scoresList) {
       return (
-        <p className="play-message">
+        <p className="play-message" style={{ textAlign: 'center' }}>
           Be the first of the Hall of Fame. PLAY the GAME!
         </p>
       );

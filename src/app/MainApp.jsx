@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
 
 import MainTitle from './common/MainTitle.atom';
-import TilesAndHallOfFame from '../tiles/TilesAndHallOfFame.template';
+import TilesAndHallOfFame from '../tiles/TilesAndHallOfFame.organism';
 
 
 import './styles.scss';
 
-const App = () => (
+const MainApp = () => (
   <Fragment>
     <MainTitle text="Colored Tiles Game" />
     <TilesAndHallOfFame />
   </Fragment>
 );
 
-export default App;
+export default MainApp;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputLabel from '../app/common/modals/InputLabel.atom';
+import InputLabel from '../app/common/InputLabel.atom';
 import Winner from './Winner.molecule';
 import NotWinner from './NotWinner.molecule';
 
