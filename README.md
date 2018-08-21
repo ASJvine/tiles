@@ -9,13 +9,12 @@ Either you finish the 15 levels of the game or you fail on the way up, a form wi
 
 Click on the **Display Hall of Fame**/**Hide Hall of Fame** button to display/hide the list respectively. 
 
-<br><br>
+Cannot wait to play? Live version (with Continuous Deployment) is available at: https://eager-saha-f29c90.netlify.com/.
+
+<br>
 
 -----------
-
-
-## Get Started Immediately
-
+<br>
 
 ## Prerequisites
 
@@ -37,7 +36,10 @@ The project was build using:
 * npm version: **5.6.0**
 * yarn **1.6.0**
 
-<br><br>
+<br>
+
+-----------
+<br>
 
 ## Get Started Immediately
 
@@ -64,9 +66,10 @@ yarn
 yarn start
 ```
 
-<br><br>
+<br>
 
 -----------
+<br>
 
 
 ## Technical Details
@@ -231,7 +234,7 @@ The game has been tested in multiple real devices:
 * [iPhone6 - 11.2(15C114)] - Safari
 * Android (OS version and browser not checked _to be updated_)
 
-To do so, a quick manual deploy has been done using [**Netlify**](https://www.netlify.com/), the last version is running at https://musing-lumiere-bc62ed.netlify.com.
+To do so, a first quick manual deploy has been done using [**Netlify**](https://www.netlify.com/) and the Terminal, the last version is running at https://musing-lumiere-bc62ed.netlify.com.
 
 Such deploy cannot be done using other machines because it requires ssh keys and user permissions.
 
@@ -245,6 +248,10 @@ Deploy done  🌎
     https://musing-lumiere-bc62ed.netlify.com
 ```
 
+Furthermore, a **Continuous Deployment (CD)** has been implemented using also [**Netlify** ](https://www.netlify.com/docs/continuous-deployment/) has been created using. Continuous deployment works by connecting a git repository to a Netlify site and keeping the two in sync.
+
+The live version (with CD) is at: https://eager-saha-f29c90.netlify.com/.
+
 <br>
 
 ### Quality Assurance
@@ -257,9 +264,10 @@ To ensure the code quality different approaches and tools have been used:
 * [FUTURE] Add JS extensions like [Flow](https://flow.org/) or [TypeScript](https://www.typescriptlang.org/)
 
 
-<br><br>
+<br>
 
 -----------
+<br>
 
 
 ## Future Improvements 🤓
@@ -276,6 +284,7 @@ To ensure the code quality different approaches and tools have been used:
 <br>
 
 -----------
+<br>
 
 
 ### Architecture inspiration: 👨‍💻 👩‍💻</span>
