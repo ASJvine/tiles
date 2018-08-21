@@ -9,7 +9,7 @@ Either you finish the 15 levels of the game or you fail on the way up, a form wi
 
 Click on the **Display Hall of Fame**/**Hide Hall of Fame** button to display/hide the list respectively. 
 
-Cannot wait to play? Live version (with Continuous Deployment) is available at: https://eager-saha-f29c90.netlify.com/.
+Cannot wait to play? 🕹️ 🤪 Live version (with Continuous Deployment) is available at: https://eager-saha-f29c90.netlify.com/.
 
 <br>
 
@@ -250,7 +250,7 @@ Deploy done  🌎
 
 Furthermore, a **Continuous Deployment (CD)** has been implemented using also [**Netlify** ](https://www.netlify.com/docs/continuous-deployment/) has been created using. Continuous deployment works by connecting a git repository to a Netlify site and keeping the two in sync.
 
-The live version (with CD) is at: https://eager-saha-f29c90.netlify.com/.
+The live version (with CD) is available at: https://eager-saha-f29c90.netlify.com/.
 
 <br>
 
