@@ -231,7 +231,19 @@ The game has been tested in multiple real devices:
 * [iPhone6 - 11.2(15C114)] - Safari
 * Android (OS version and browser not checked _to be updated_)
 
-To do so, a quick deploy has been done using [**Netlify**](https://www.netlify.com/), the last version is running at https://musing-lumiere-bc62ed.netlify.com.
+To do so, a quick manual deploy has been done using [**Netlify**](https://www.netlify.com/), the last version is running at https://musing-lumiere-bc62ed.netlify.com.
+
+Such deploy cannot be done using other machines because it requires ssh keys and user permissions.
+
+```sh
+Alexandres-MacBook-Pro:tiles alexandre$ netlifyctl deploy
+What path would you like deployed? (default: .) ./dist
+Counting objects: 3 total objects  ✔
+Resolving deltas: 1 objects to upload  ✔
+Uploading objects: 1/1 done  ✔    
+Deploy done  🌎
+    https://musing-lumiere-bc62ed.netlify.com
+```
 
 <br>
 
